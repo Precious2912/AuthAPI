@@ -16,7 +16,7 @@ namespace AuthService.API
                 if (!context.Users.Any())
                 {
                     //seed data
-                    var user1 = new User { Email = "test@gmail.com", FirstName = "First", LastName = "Last", Gender = "F", PhoneNumber = "080XXXXXXXXX", Username = "test21", PasswordHash = "" };
+                    var user1 = new User { Email = "test@gmail.com", FirstName = "Test", LastName = "User", Gender = "F", PhoneNumber = "080XXXXXXXX", Username = "test21", PasswordHash = "erftyhuytr23456gfdfghj=" };
 
                     context.Users.Add(user1);
                     context.SaveChanges();

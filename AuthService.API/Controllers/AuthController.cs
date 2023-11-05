@@ -1,6 +1,5 @@
 ﻿using AuthService.Core.Interfaces;
 using AuthService.Core.Models;
-using AuthService.Core.Services;
 using AuthService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -24,10 +23,11 @@ namespace AuthService.API.Controllers
             return Ok(response);
         }
 
-        //[HttpPost("login")]
-        //public async Task<IActionResult> Login([FromBody] UserLoginModel loginModel)
-        //{
-
-        //}
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginModel loginModel)
+        {
+            var response = await _service.Login(loginModel);
+            return Ok(response);
+        }
     }
 }

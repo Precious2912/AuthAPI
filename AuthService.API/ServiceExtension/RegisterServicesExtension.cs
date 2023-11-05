@@ -19,10 +19,10 @@ namespace AuthService.API.ServiceExtension
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = configuration["JwtSettings:Issuer"],
-                        ValidAudience = configuration["JwtSettings:Audience"],
+                        ValidIssuer = configuration["Jwt:Issuer"],
+                        ValidAudience = configuration["Jwt:Audience"],
                         IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"])
+                            Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"])
                             )
                     };
                 });

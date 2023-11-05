@@ -6,5 +6,6 @@ namespace AuthService.Core.Interfaces
     public interface IAuthenticationService
     {
         Task<Response<string>> Register(UserRegistrationModel request);
+        Task<Response<string>> Login(UserLoginModel request);
     }
 }
