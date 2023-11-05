@@ -95,7 +95,7 @@ namespace AuthService.Core.Services
             {
                 Status = Constants.STATUS_SUCCESS,
                 Message = "Login successful",
-                Data = token,
+                Data = $"Token {token}",
             };
         }
 
