@@ -1,6 +1,7 @@
 ﻿using AuthService.Core.Interfaces;
 using AuthService.Core.Models;
 using AuthService.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -27,6 +28,14 @@ namespace AuthService.API.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginModel loginModel)
         {
             var response = await _service.Login(loginModel);
+            return Ok(response);
+        }
+
+        [HttpGet("users")]
+        [Authorize]
+        public async Task<IActionResult> GetUsers()
+        {
+            var response = await _service.GetUsers();
             return Ok(response);
         }
     }

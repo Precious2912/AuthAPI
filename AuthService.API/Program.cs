@@ -1,5 +1,6 @@
 using AuthService.API;
 using AuthService.API.ServiceExtension;
+using AuthService.Core;
 using AuthService.Core.Interfaces;
 using AuthService.Core.Services;
 using AuthService.Entities;
@@ -28,6 +29,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddAutoMapper(typeof(Automapper));
 builder.Services.ConfigureBadRequest();
 builder.Services.ConfigureSwaggerGen();
 builder.Services.AddHttpClient();
@@ -53,6 +55,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

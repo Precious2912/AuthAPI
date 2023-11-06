@@ -1,8 +1,10 @@
 ﻿using AuthService.Core.Entities;
 using AuthService.Core.Interfaces;
 using AuthService.Core.Models;
+using AuthService.Core.Models.Dto;
 using AuthService.Entities;
 using AuthService.Models;
+using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,10 +17,12 @@ namespace AuthService.Core.Services
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
-        public AuthenticationService(AppDbContext context, IConfiguration config) 
+        private readonly IMapper _mapper;
+        public AuthenticationService(AppDbContext context, IConfiguration config, IMapper mapper) 
         { 
             _context = context;
             _config = config;
+            _mapper = mapper;
         }
 
         public async Task<Response<string>> Register(UserRegistrationModel request)
@@ -96,6 +100,24 @@ namespace AuthService.Core.Services
                 Status = Constants.STATUS_SUCCESS,
                 Message = "Login successful",
                 Data = $"Token {token}",
+            };
+        }
+
+        public async Task<Response<List<UserDto>>> GetUsers()
+        {
+            //Retrieve all users from db
+            var users = _context.Users.ToList().OrderByDescending(x => x.Id);
+
+            //check if users list is empty
+
+            //Map users to userDto
+            var userResp = _mapper.Map<IEnumerable<UserDto>>(users);
+
+            return new Response<List<UserDto>>
+            {
+                Status = Constants.STATUS_SUCCESS,
+                Message = "Successfully retrieved users",
+                Data = userResp.ToList()
             };
         }
 
