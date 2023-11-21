@@ -1,3 +1,4 @@
+using AuthService;
 using AuthService.API;
 using AuthService.API.ServiceExtension;
 using AuthService.Core;
@@ -36,7 +37,11 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.EnableAnnotations();
+    c.SchemaFilter<SwaggerSchemaExampleFilter>();
+});
 
 var app = builder.Build();
 
